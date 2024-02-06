@@ -6,7 +6,46 @@
     <title>GIS Web App</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <style>
-        #map { height: 500px; }
+        body {
+            ul {
+            list-style-type: none;
+            }
+        }
+
+        #map { 
+            height: 100vh; 
+        }
+
+        .leaflet-touch .leaflet-bar a {
+            width: 110px;
+            height: 30px;
+            line-height: 30px;
+        }
+
+        .leaflet-control-geocoder-icon {
+            display: none;
+        }
+        .leaflet-touch .leaflet-control-layers, .leaflet-touch .leaflet-bar {
+            border: 2px solid rgba(0,0,0,0.2);
+            background-clip: padding-box;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .leaflet-touch .leaflet-bar a {
+            max-height: 120px;
+            overflow: hidden;
+        }
+        
+        .leaflet-draw-actions {
+            top: 32px; 
+            display: flex; 
+            flex-direction: column; 
+            padding-left: 10px; 
+            border: 1px solid rgba(0, 0, 0, 0.085);
+            border-radius: 5%;
+            background-color: aqua;
+        }
     </style>
 </head>
 <body>
@@ -18,5 +57,20 @@
     <script src="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.js"></script>
     <script src="https://unpkg.com/leaflet-active-layers/dist/active-layers.js"></script>
     <script src="app.js"></script>
+
+    <script>
+        
+        const nothingText = document.querySelector('.leaflet-control-geocoder-form-no-error');
+        const inputSearchBox = document.querySelector('.leaflet-control-geocoder-form input[type="text"]');
+        
+        nothingText.style.textAlign = 'center';
+        nothingText.style.marginLeft = 'auto'; 
+        nothingText.style.marginRight = 'auto';
+        
+        inputSearchBox.addEventListener('click', () => {
+            nothingText.style.display = 'none';
+        });
+        var map = L.map('map').setMaxBounds([[southLat, westLng], [northLat, eastLng]]);
+    </script>
 </body>
 </html>
